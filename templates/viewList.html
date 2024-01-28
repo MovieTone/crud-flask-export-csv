@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Inventory</title>
+</head>
+<body align="center">
+    <div align="center">
+      <a href="/create">Add</a> |
+      <a href="/view">View</a>
+    </div>
+
+    <h2>Item Inventory</h2>
+
+    <table border="1" align="center">
+        <tr>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    {% for item in items %}
+        <tr>
+            <td>
+                {{item.sku}}
+            </td>
+            <td>
+                {{item.name}}
+            </td>
+            <td>
+                {{item.description}}
+            </td>
+            <td>
+                ${{item.price}}
+            </td>
+            <td>
+                {{item.qty}}
+            </td>
+            <td>
+                <form action="/update/{{item.sku}}" method="get">
+                    <button type="submit">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form action="/delete/{{item.sku}}" method="get">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+
+    {% endfor %}
+    </table>
+
+    <br>
+    <form action="/create" method="get">
+        <button type="submit">Add new Item</button>
+    </form>
+    <form method="POST">
+        <button type="submit">Export Data</button>
+    </form>
+</body>
+</html>
